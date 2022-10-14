@@ -1,0 +1,24 @@
+from datetime import datetime
+from sqlite3 import Date
+
+
+Now = datetime.now()
+Date = datetime.date(Now)
+Year = int(Date.strftime("%Y"))
+Month = int(Date.strftime("%m"))
+Day = int(Date.strftime("%d"))
+
+GoHome = datetime(year=Year, month=Month, day=Day, hour=19, minute=00, second=00)
+
+consulta = datetime.now().time().strftime('%H:%M:%S')
+Date = datetime(year=Year, month=Month, day=Day, hour=19, minute=00).strftime('%H:%M:%S')
+
+if consulta >= Date:
+    print('Hora de ir a casa')
+else:
+    consulta = GoHome - Now
+    consulta = consulta.total_seconds()
+    horas, restante = divmod(consulta, 3600)
+    minutos, segundos = divmod(restante, 60)
+
+    print(f' quedan {int(horas)} horas y {int(minutos)} minutos.')
